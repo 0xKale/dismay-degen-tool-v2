@@ -275,7 +275,7 @@ void gui::Render() noexcept
 
 		ImGui::SetCursorPos({ 125, 19 });
 		ImGui::BeginGroup(); {
-			if (elements::tab("Host", functions::head_selected == HEAD_1)) functions::head_selected = HEAD_1;
+			if (elements::tab("Main", functions::head_selected == HEAD_1)) functions::head_selected = HEAD_1;
 			ImGui::SameLine();
 			if (elements::tab("Friends", functions::head_selected == HEAD_2)) functions::head_selected = HEAD_2;
 		}
@@ -288,9 +288,11 @@ void gui::Render() noexcept
 			ImGui::SetCursorPos({ 25, 85 });
 			ImGui::BeginChild("##container", ImVec2(190, 275), false, ImGuiWindowFlags_NoScrollbar); {
 				ImGui::SliderFloat("FOV", &functions::fFOV, 65.0f, 120.0f); // FOV Slider
+				ImGui::SliderFloat("FOVMIN", &functions::fFOVMin, 65.0f, 120.0f); // FOVMin Slider
 				ImGui::SliderInt("FPS", &functions::fFPS, 60, 500); // FPS Slider
 				ImGui::SliderFloat("Map Size", &functions::fMapSize, 1.0f, 2.0f);
-				ImGui::Checkbox("Enable", &functions::bChat); // Chat Enable/Disable Checkbox
+				ImGui::Checkbox("Enable Chat", &functions::bChat); // Chat Enable/Disable Checkbox
+				ImGui::Checkbox("Enable Mouse Fix", &functions::bMouseFix); // Chat Enable/Disable Checkbox
 
 			}
 			ImGui::EndChild();
@@ -324,6 +326,8 @@ LRESULT CALLBACK WindowProcess(
 	functions::funChat(); // Chat Enable/Disable
 	functions::funFPS(); // FPS
 	functions::funMapSize(); // Map Size
+	functions::funFOVMin(); // FOV Min
+	functions::funMouseFix(); // Mouse Fix
 
 	// Pass Messages to Imgui
 	if (gui::open && ImGui_ImplWin32_WndProcHandler(
