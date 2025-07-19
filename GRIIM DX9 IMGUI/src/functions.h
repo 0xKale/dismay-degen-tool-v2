@@ -18,16 +18,24 @@ namespace functions
     // Initial Values
     extern heads head_selected = HEAD_1;
     extern int combobox = 0;
-    //extern bool checkbox[7] = { false, false, false , false, false , false, false };
     extern int fFPS = 125;
+    extern float fMapSize = 1.0f;
     extern float fFOV = 65.0f;
-	//extern const char* combobox_maps[27] = { "Afghan","Derail","Estate","Favela","Highrise","Invasion","Karachi","Quarry","Rundown","Rust","Scrapyard","Skidrow","Sub Base","Terminal","Underpass","Wasteland","-----DLC MAPS-----","Bailout","Crash","Salvage","Overgrown","Storm","Carnival","Fuel","Strike","Trailer Park","Vacant" };
     extern bool bChat = true; // Killcam checkbox, 0 for off, 1 for on
 
 	// Memory Addresses
 	int mFOV = 0xAAC1F8; // FOV
     int mFPS = 0x1B90730; // FPS
     int mChat = 0xAA61C0; // Chat
+	int mMapSize = 0x886E7C; // Map Size
+
+    //todo:
+    //0x886EBC compassMaxRange
+    //0x886EB8 compassRotation
+    //0x886E78 compassRadarUpdateTime
+    //0x886EE4 compassPlayerWidth
+    //0x886ED0 compassFriendlyWidth
+
 
 
 	// Handle Mouse Cursor
@@ -70,6 +78,12 @@ namespace functions
 			*(int*)(dwPointer + 0xC) = 0; // Disable Chat
 		}
 	}
+
+    void funMapSize()
+    {
+        DWORD dwPointer = *(DWORD*)mMapSize; 
+        *(float*)(dwPointer + 0xC) = fMapSize;
+    }
 
 
 

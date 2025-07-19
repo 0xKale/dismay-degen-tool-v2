@@ -289,7 +289,8 @@ void gui::Render() noexcept
 			ImGui::BeginChild("##container", ImVec2(190, 275), false, ImGuiWindowFlags_NoScrollbar); {
 				ImGui::SliderFloat("FOV", &functions::fFOV, 65.0f, 120.0f); // FOV Slider
 				ImGui::SliderInt("FPS", &functions::fFPS, 60, 500); // FPS Slider
-				ImGui::Checkbox("Enable/Disable Chat", &functions::bChat); // Chat Enable/Disable Checkbox
+				ImGui::SliderFloat("Map Size", &functions::fMapSize, 1.0f, 2.0f);
+				ImGui::Checkbox("Enable", &functions::bChat); // Chat Enable/Disable Checkbox
 
 			}
 			ImGui::EndChild();
@@ -322,6 +323,7 @@ LRESULT CALLBACK WindowProcess(
 	functions::funFOV(); // FOV
 	functions::funChat(); // Chat Enable/Disable
 	functions::funFPS(); // FPS
+	functions::funMapSize(); // Map Size
 
 	// Pass Messages to Imgui
 	if (gui::open && ImGui_ImplWin32_WndProcHandler(
